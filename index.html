@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LGS Pro 2026 - Tüm Dersler & Soru Bankası</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h1>LGS Pro <span class="badge">2026</span></h1>
+            </div>
+
+            <div class="nav-menu">
+                <div class="nav-header">DERSLER</div>
+                <button class="nav-item active" data-subject="math">
+                    <i class="fa-solid fa-calculator"></i> Matematik
+                </button>
+                <button class="nav-item" data-subject="science">
+                    <i class="fa-solid fa-flask"></i> Fen Bilimleri
+                </button>
+                <button class="nav-item" data-subject="turkish">
+                    <i class="fa-solid fa-book-open"></i> Türkçe
+                </button>
+                <button class="nav-item" data-subject="history">
+                    <i class="fa-solid fa-landmark"></i> İnkılap Tarihi
+                </button>
+                <button class="nav-item" data-subject="english">
+                    <i class="fa-solid fa-language"></i> İngilizce
+                </button>
+                <button class="nav-item" data-subject="religion">
+                    <i class="fa-solid fa-mosque"></i> Din Kültürü
+                </button>
+
+                <div class="nav-header">DİĞER</div>
+                <button class="tab-btn" data-tab="mistakes">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Dikkat!
+                </button>
+                <button class="tab-btn" data-tab="questions">
+                    <i class="fa-solid fa-pen-to-square"></i> 100 Soru
+                </button>
+                <button class="tab-btn" data-tab="game">
+                    <i class="fa-solid fa-gamepad"></i> Oyun
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div id="dynamic-content" class="content-display">
+                <!-- Content will be injected here via JS -->
+            </div>
+        </main>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

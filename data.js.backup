@@ -1,0 +1,876 @@
+const courseData = {
+    math: {
+        topics: [
+            {
+                id: "carpanlar-katlar",
+                title: "1. Çarpanlar ve Katlar",
+                content: {
+                    lecture: `<h2>Çarpanlar ve Katlar</h2><p>Her doğal sayı iki doğal sayının çarpımı olarak yazılabilir. EBOB ve EKOK problemleri bu ünitenin temelidir.</p>`,
+                    summary: `<h2>Özet</h2><p>EBOB: En Büyük Ortak Bölen. EKOK: En Küçük Ortak Kat. Asal Sayılar: Sadece 1 ve kendisine bölünenler.</p>`,
+                    tips: `<h2>İpucu</h2><p>Parçalama sorularında EBOB, birleştirme sorularında EKOK kullanılır.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Aralarında asal sayıların EBOB'u 1'dir.</p>`,
+                    questions: [{ id: 1, text: "24 ve 36'nın EBOB'u kaçtır?", options: ["6", "12", "18", "24"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "EBOB", match: "Bölen" }, { text: "EKOK", match: "Kat" }] }
+                }
+            },
+            {
+                id: "uslu-ifadeler",
+                title: "2. Üslü İfadeler",
+                content: {
+                    lecture: `<h2>Üslü İfadeler</h2><p>Tam sayıların tam sayı kuvvetleri, üslü ifadelerle işlemler ve bilimsel gösterim.</p>`,
+                    summary: `<h2>Özet</h2><p>Tabanlar aynıysa çarparken üsler toplanır. Bilimsel gösterim: a x 10^n (1 ≤ |a| < 10).</p>`,
+                    tips: `<h2>İpucu</h2><p>Negatif üs sayıyı ters çevirir.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>(-2)^4 ≠ -2^4. Parantez önemlidir.</p>`,
+                    questions: [{ id: 11, text: "2^-3 kaçtır?", options: ["-8", "1/8", "-1/8", "8"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Negatif Üs", match: "Ters Çevir" }, { text: "Sıfırıncı Kuvvet", match: "1" }] }
+                }
+            },
+            {
+                id: "karekoklu-ifadeler",
+                title: "3. Kareköklü İfadeler",
+                content: {
+                    lecture: `<h2>Kareköklü İfadeler</h2><p>Tam kare sayılar ve kareköklü ifadelerle işlemler.</p>`,
+                    summary: `<h2>Özet</h2><p>Kök dışına çıkarma, kök içine alma. Toplama için kök içleri aynı olmalı.</p>`,
+                    tips: `<h2>İpucu</h2><p>√a²b = a√b</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>√a + √b ≠ √(a+b)</p>`,
+                    questions: [{ id: 21, text: "√144 kaçtır?", options: ["10", "12", "14", "16"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "√100", match: "10" }, { text: "√0", match: "0" }] }
+                }
+            },
+            {
+                id: "veri-analizi",
+                title: "4. Veri Analizi",
+                content: {
+                    lecture: `<h2>Veri Analizi</h2><p>Çizgi grafiği, sütun grafiği ve daire grafiği oluşturma ve yorumlama.</p>`,
+                    summary: `<h2>Özet</h2><p>Daire grafiği: Bütünün parçalarını göstermek için ideal. 360 derece kullanılır.</p>`,
+                    tips: `<h2>İpucu</h2><p>Oran-orantı kurarak açıları hesapla.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Grafikler arası dönüşüm yaparken toplam sayıya dikkat et.</p>`,
+                    questions: [{ id: 31, text: "360 derecelik daire grafiğinde %25 kaç derecedir?", options: ["45", "90", "120", "180"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Daire Grafiği", match: "360 Derece" }, { text: "Çizgi Grafiği", match: "Değişim" }] }
+                }
+            },
+            {
+                id: "basit-olaylar",
+                title: "5. Basit Olayların Olma Olasılığı",
+                content: {
+                    lecture: `<h2>Olasılık</h2><p>Bir olayın olma olasılığı = İstenilen Durum Sayısı / Tüm Durumların Sayısı.</p>`,
+                    summary: `<h2>Özet</h2><p>Kesin olay (1), İmkansız olay (0). Olasılık 0 ile 1 arasındadır.</p>`,
+                    tips: `<h2>İpucu</h2><p>"Veya" toplama, "Ve" çarpma anlamına gelebilir (bağımsız olaylarda).</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Olasılık değeri 1'den büyük olamaz.</p>`,
+                    questions: [{ id: 41, text: "Bir zar atıldığında 7 gelme olasılığı nedir?", options: ["0", "1/6", "1", "1/2"], correct: 0 }],
+                    game: { type: "matching", pairs: [{ text: "İmkansız Olay", match: "0" }, { text: "Kesin Olay", match: "1" }] }
+                }
+            },
+            {
+                id: "cebirsel-ifadeler",
+                title: "6. Cebirsel İfadeler ve Özdeşlikler",
+                content: {
+                    lecture: `<h2>Cebirsel İfadeler</h2><p>İçinde en az bir bilinmeyen bulunan ifadelerdir. Özdeşlikler: (a+b)², (a-b)², a²-b².</p>`,
+                    summary: `<h2>Özet</h2><p>Tam kare özdeşlikleri ve iki kare farkı çok önemlidir.</p>`,
+                    tips: `<h2>İpucu</h2><p>Benzer terimler kendi arasında toplanıp çıkarılır.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>(a+b)² ≠ a² + b² (Ortadaki 2ab terimini unutma!)</p>`,
+                    questions: [{ id: 51, text: "(x+3)² açılımı nedir?", options: ["x²+9", "x²+3x+9", "x²+6x+9", "x²+9x+9"], correct: 2 }],
+                    game: { type: "matching", pairs: [{ text: "İki Kare Farkı", match: "a²-b²" }, { text: "Tam Kare", match: "(a+b)²" }] }
+                }
+            },
+            {
+                id: "dogrusal-denklemler",
+                title: "7. Doğrusal Denklemler",
+                content: {
+                    lecture: `<h2>Doğrusal Denklemler</h2><p>Birinci dereceden bir bilinmeyenli denklemler, koordinat sistemi ve eğim.</p>`,
+                    summary: `<h2>Özet</h2><p>Eğim (m) = Dikey / Yatay. y = mx + n denkleminde m eğimdir.</p>`,
+                    tips: `<h2>İpucu</h2><p>Sola yatık doğruların eğimi negatiftir.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Orijinden geçen doğrularda sabit terim olmaz (y=mx).</p>`,
+                    questions: [{ id: 61, text: "y = 3x + 5 doğrusunun eğimi kaçtır?", options: ["3", "5", "-3", "1/3"], correct: 0 }],
+                    game: { type: "matching", pairs: [{ text: "Dikey/Yatay", match: "Eğim" }, { text: "Orijin", match: "(0,0)" }] }
+                }
+            },
+            {
+                id: "esitsizlikler",
+                title: "8. Eşitsizlikler",
+                content: {
+                    lecture: `<h2>Eşitsizlikler</h2><p><, >, ≤, ≥ sembolleri ile kurulan cümlelerdir.</p>`,
+                    summary: `<h2>Özet</h2><p>Negatif sayıyla çarpılır veya bölünürse eşitsizlik yön değiştirir.</p>`,
+                    tips: `<h2>İpucu</h2><p>Sayı doğrusunda dahilse içi dolu, değilse içi boş yuvarlak.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Yön değiştirmeyi unutma!</p>`,
+                    questions: [{ id: 71, text: "-2x < 10 eşitsizliğinin çözümü nedir?", options: ["x < -5", "x > -5", "x < 5", "x > 5"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "<", match: "Küçüktür" }, { text: "≥", match: "Büyük Eşit" }] }
+                }
+            },
+            {
+                id: "ucgenler",
+                title: "9. Üçgenler",
+                content: {
+                    lecture: `<h2>Üçgenler</h2><p>Üçgen eşitsizliği, açı-kenar bağıntıları, kenarortay, açıortay, yükseklik ve Pisagor.</p>`,
+                    summary: `<h2>Özet</h2><p>Pisagor: a² + b² = c² (Dik üçgende). Üçgen eşitsizliği: |a-b| < c < a+b.</p>`,
+                    tips: `<h2>İpucu</h2><p>Muhteşem üçlü: Dik üçgende hipotenüse inen kenarortay hipotenüsün yarısıdır.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>En uzun kenar en büyük açının karşısındadır.</p>`,
+                    questions: [{ id: 81, text: "Dik kenarları 3 ve 4 olan üçgenin hipotenüsü kaçtır?", options: ["5", "6", "7", "8"], correct: 0 }],
+                    game: { type: "matching", pairs: [{ text: "Pisagor", match: "a²+b²=c²" }, { text: "Kenarortay", match: "G Ağırlık Merkezi" }] }
+                }
+            },
+            {
+                id: "eslik-benzerlik",
+                title: "10. Eşlik ve Benzerlik",
+                content: {
+                    lecture: `<h2>Eşlik ve Benzerlik</h2><p>Şekillerin aynı olması eşlik, oranlı olması benzerliktir.</p>`,
+                    summary: `<h2>Özet</h2><p>Benzerlik oranı (k). Alanlar oranı k² dir.</p>`,
+                    tips: `<h2>İpucu</h2><p>Temel benzerlik teoremi (Tales) paralel doğrularda kullanılır.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Eş şekillerin benzerlik oranı 1'dir.</p>`,
+                    questions: [{ id: 91, text: "Benzerlik oranı 1/2 olan iki üçgenin alanları oranı kaçtır?", options: ["1/2", "1/4", "1/8", "2"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Eşlik", match: "k=1" }, { text: "Alan Oranı", match: "k²" }] }
+                }
+            },
+            {
+                id: "donusum-geometrisi",
+                title: "11. Dönüşüm Geometrisi",
+                content: {
+                    lecture: `<h2>Dönüşüm Geometrisi</h2><p>Öteleme, Yansıma ve Ötelemeli Yansıma.</p>`,
+                    summary: `<h2>Özet</h2><p>X eksenine göre yansımada y işaret değiştirir. Y eksenine göre yansımada x işaret değiştirir.</p>`,
+                    tips: `<h2>İpucu</h2><p>Ötelemede şeklin yönü ve boyutu değişmez, sadece yeri değişir.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Yansımada şekil ters döner.</p>`,
+                    questions: [{ id: 101, text: "(2,3) noktasının x eksenine göre yansıması nedir?", options: ["(-2,3)", "(2,-3)", "(-2,-3)", "(3,2)"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Öteleme", match: "Yer Değiştirme" }, { text: "Yansıma", match: "Simetri" }] }
+                }
+            },
+            {
+                id: "geometrik-cisimler",
+                title: "12. Geometrik Cisimler",
+                content: {
+                    lecture: `<h2>Geometrik Cisimler</h2><p>Prizmalar, Silindir, Piramit ve Koni.</p>`,
+                    summary: `<h2>Özet</h2><p>Hacim = Taban Alanı x Yükseklik (Prizma/Silindir). Piramit/Koni'de 1/3 ile çarpılır.</p>`,
+                    tips: `<h2>İpucu</h2><p>Konide ana doğru (a), yükseklik (h) ve yarıçap (r) arasında Pisagor vardır (a²=h²+r²).</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Silindirin açık hali dikdörtgen ve iki dairedir.</p>`,
+                    questions: [{ id: 111, text: "Yarıçapı 3, yüksekliği 4 olan silindirin hacmi? (π=3)", options: ["36", "72", "108", "144"], correct: 2 }], // 3*9*4 = 108
+                    game: { type: "matching", pairs: [{ text: "Silindir", match: "πr²h" }, { text: "Koni", match: "πr²h/3" }] }
+                }
+            }
+        ]
+    },
+    science: {
+        topics: [
+            {
+                id: "mevsimler-iklim",
+                title: "1. Mevsimler ve İklim",
+                content: {
+                    lecture: `<h2>Mevsimler ve İklim</h2><p>Eksen eğikliği ve yıllık hareket mevsimleri oluşturur.</p>`,
+                    summary: `<h2>Özet</h2><p>21 Haziran, 21 Aralık, 21 Mart, 23 Eylül önemli tarihlerdir.</p>`,
+                    tips: `<h2>İpucu</h2><p>İklim geniş bölge, hava olayı dar bölge.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Dünya'nın Güneş'e uzaklığı mevsimi etkilemez.</p>`,
+                    questions: [{ id: 101, text: "En uzun gece hangi tarihte (KYK)?", options: ["21 Haziran", "21 Aralık", "23 Eylül", "21 Mart"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Klimatolog", match: "İklimci" }, { text: "Meteorolog", match: "Havacılar" }] }
+                }
+            },
+            {
+                id: "dna-genetik",
+                title: "2. DNA ve Genetik Kod",
+                content: {
+                    lecture: `<h2>DNA ve Genetik Kod</h2><p>Nükleotid, Gen, DNA, Kromozom.</p>`,
+                    summary: `<h2>Özet</h2><p>A=T, G=C. Kalıtım, çaprazlamalar.</p>`,
+                    tips: `<h2>İpucu</h2><p>Büyük harf baskın, küçük harf çekinik gen.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Akraba evliliği genetik hastalık riskini artırır.</p>`,
+                    questions: [{ id: 111, text: "Hangisi DNA'nın yapı birimidir?", options: ["Gen", "Nükleotid", "Kromozom", "Hücre"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Adenin", match: "Timin" }, { text: "Guanin", match: "Sitozin" }] }
+                }
+            },
+            {
+                id: "basinc",
+                title: "3. Basınç",
+                content: {
+                    lecture: `<h2>Basınç</h2><p>Katı, Sıvı ve Gaz Basıncı.</p>`,
+                    summary: `<h2>Özet</h2><p>Katı: P=F/S. Sıvı: P=h.d.g. Gaz: Açık hava basıncı (Torricelli).</p>`,
+                    tips: `<h2>İpucu</h2><p>Sıvı basıncı kabın şekline bağlı değildir.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Katılar kuvveti, sıvılar basıncı aynen iletir (Pascal).</p>`,
+                    questions: [{ id: 121, text: "Sıvı basıncı hangisine bağlıdır?", options: ["Yüzey alanı", "Derinlik", "Kap şekli", "Renk"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Pascal", match: "Sıvı Basıncı" }, { text: "Barometre", match: "Gaz Basıncı" }] }
+                }
+            },
+            {
+                id: "madde-endustri",
+                title: "4. Madde ve Endüstri",
+                content: {
+                    lecture: `<h2>Madde ve Endüstri</h2><p>Periyodik sistem, fiziksel-kimyasal değişimler, asit-bazlar.</p>`,
+                    summary: `<h2>Özet</h2><p>Periyodik tablo: 7 periyot, 18 grup. Asitler pH<7, Bazlar pH>7.</p>`,
+                    tips: `<h2>İpucu</h2><p>Metaller elektron verir, ametaller alır.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Kimyasal tepkimelerde kütle korunur.</p>`,
+                    questions: [{ id: 131, text: "pH değeri 2 olan madde nedir?", options: ["Asit", "Baz", "Nötr", "Tuz"], correct: 0 }],
+                    game: { type: "matching", pairs: [{ text: "Asit", match: "Ekşi" }, { text: "Baz", match: "Acı" }] }
+                }
+            },
+            {
+                id: "basit-makineler",
+                title: "5. Basit Makineler",
+                content: {
+                    lecture: `<h2>Basit Makineler</h2><p>Makaralar, kaldıraçlar, eğik düzlem, çıkrık, dişliler.</p>`,
+                    summary: `<h2>Özet</h2><p>İşten veya enerjiden kazanç YOKTUR. Kuvvetten kazanç varsa yoldan kayıp vardır.</p>`,
+                    tips: `<h2>İpucu</h2><p>Hareketli makarada kuvvetten 2 kat kazanç vardır.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Basit makineler iş kolaylığı sağlar.</p>`,
+                    questions: [{ id: 141, text: "Hangisinde kuvvetten kazanç kesinlikle vardır?", options: ["Sabit Makara", "Hareketli Makara", "Tahterevalli", "Makas"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Sabit Makara", match: "Yön Değiştirir" }, { text: "Eğik Düzlem", match: "Kuvvet Kazancı" }] }
+                }
+            },
+            {
+                id: "enerji-donusumleri",
+                title: "6. Enerji Dönüşümleri ve Çevre",
+                content: {
+                    lecture: `<h2>Enerji Dönüşümleri</h2><p>Besin zinciri, fotosentez, solunum, madde döngüleri.</p>`,
+                    summary: `<h2>Özet</h2><p>Fotosentez: Işık + CO2 + Su -> Besin + O2. Solunum tam tersi.</p>`,
+                    tips: `<h2>İpucu</h2><p>Mantarlar üretici değildir, ayrıştırıcıdır.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Fotosentez sadece gündüz (ışıkta) olur, solunum gece-gündüz olur.</p>`,
+                    questions: [{ id: 151, text: "Fotosentez nerede gerçekleşir?", options: ["Mitokondri", "Kloroplast", "Koful", "Çekirdek"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Üretici", match: "Bitki" }, { text: "Ayrıştırıcı", match: "Mantar/Bakteri" }] }
+                }
+            },
+            {
+                id: "elektrik-yukleri",
+                title: "7. Elektrik Yükleri",
+                content: {
+                    lecture: `<h2>Elektrik Yükleri</h2><p>Elektriklenme çeşitleri, elektroskop, topraklama.</p>`,
+                    summary: `<h2>Özet</h2><p>Aynı yükler iter, zıt yükler çeker. Nötr cisimler yüklü cisimler tarafından çekilir.</p>`,
+                    tips: `<h2>İpucu</h2><p>Sürtünme ile elektriklenmede cisimler zıt yüklenir.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Protonlar (artı yükler) hareket etmez, elektronlar (eksi yükler) hareket eder.</p>`,
+                    questions: [{ id: 161, text: "Pozitif yüklü cisim nötr cismi ne yapar?", options: ["İter", "Çeker", "Etkilemez", "Nötrler"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Aynı Yük", match: "İter" }, { text: "Zıt Yük", match: "Çeker" }] }
+                }
+            }
+        ]
+    },
+    turkish: {
+        topics: [
+            {
+                id: "sozcukte-anlam",
+                title: "1. Sözcükte Anlam",
+                content: {
+                    lecture: `<h2>Sözcükte Anlam</h2><p>Gerçek, Mecaz, Yan, Terim Anlam. Eş, Zıt, Sesteş Anlamlı Kelimeler.</p>`,
+                    summary: `<h2>Özet</h2><p>Gerçek: İlk akla gelen. Mecaz: Tamamen uzaklaşmış. Terim: Bilim/Sanat dalı.</p>`,
+                    tips: `<h2>İpucu</h2><p>Cümledeki kullanımına bakmadan anlamı belirleme.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>"Boş kutu" (Gerçek) vs "Boş sözler" (Mecaz).</p>`,
+                    questions: [{ id: 191, text: "\"Ağır\" kelimesi hangisinde mecazdır?", options: ["Ağır çanta", "Ağır sözler", "Ağır masa", "Ağır taş"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Mecaz", match: "Soyut" }, { text: "Terim", match: "Bilim" }] }
+                }
+            },
+            {
+                id: "cumlede-anlam",
+                title: "2. Cümlede Anlam",
+                content: {
+                    lecture: `<h2>Cümlede Anlam</h2><p>Neden-Sonuç, Amaç-Sonuç, Koşul-Sonuç, Öznel-Nesnel Yargılar.</p>`,
+                    summary: `<h2>Özet</h2><p>Amaç: "...mek için". Neden: "...dığı için". Koşul: "-sa/-se".</p>`,
+                    tips: `<h2>İpucu</h2><p>"Amacıyla" kelimesini getirince anlamlıysa Amaç-Sonuçtur.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Neden-Sonuçta eylem gerçekleşmiştir, Amaç-Sonuçta gerçekleşip gerçekleşmediği belli değildir.</p>`,
+                    questions: [{ id: 192, text: "Hangisi amaç-sonuç cümlesidir?", options: ["Yağmur yağdığı için ıslandım.", "Seni görmek için geldim.", "Çalışırsan başarırsın.", "Hava çok sıcak."], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Amaç", match: "Hedef" }, { text: "Koşul", match: "Şart" }] }
+                }
+            },
+            {
+                id: "paragrafta-anlam",
+                title: "3. Paragrafta Anlam",
+                content: {
+                    lecture: `<h2>Paragrafta Anlam</h2><p>Ana Düşünce, Yardımcı Düşünce, Konu, Başlık, Anlatım Biçimleri.</p>`,
+                    summary: `<h2>Özet</h2><p>Ana Düşünce: Yazarın mesajı. Konu: Ne anlatılıyor? Anlatım: Betimleme, Öyküleme...</p>`,
+                    tips: `<h2>İpucu</h2><p>Ana düşünce genellikle son cümlededir.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Paragrafın dışına çıkıp kendi yorumunu katma.</p>`,
+                    questions: [{ id: 193, text: "Yazarın okuyucuya vermek istediği mesaja ne denir?", options: ["Konu", "Başlık", "Ana Düşünce", "Giriş"], correct: 2 }],
+                    game: { type: "matching", pairs: [{ text: "Betimleme", match: "Resim Çizme" }, { text: "Öyküleme", match: "Video Çekme" }] }
+                }
+            },
+            {
+                id: "soz-gruplarinda-anlam",
+                title: "4. Söz Gruplarında Anlam",
+                content: {
+                    lecture: `<h2>Söz Gruplarında Anlam</h2><p>Deyimler, Atasözleri, İkilemeler, Özdeyişler ve bunların cümledeki anlamı.</p>`,
+                    summary: `<h2>Özet</h2><p>Deyim: Özel anlam taşıyan kalıplaşmış söz. Atasözü: Halk bilgeliği. İkileme: Aynı/yakın anlamlı kelimelerin tekrarı.</p>`,
+                    tips: `<h2>İpucu</h2><p>Deyimler mecaz anlamlıdır, atasözleri öğüt verir.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>"Eli açık" (cömert) deyimdir, "El açmak" (dilenmek) farklı bir deyimdir.</p>`,
+                    questions: [{ id: 194, text: "Hangisi deyimdir?", options: ["Damlaya damlaya göl olur", "Ağzı kulaklarında", "Yavaş yavaş", "Güzel güzel"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Deyim", match: "Mecaz" }, { text: "Atasözü", match: "Öğüt" }] }
+                }
+            },
+            {
+                id: "anlatim-bozukluklari",
+                title: "5. Anlatım Bozuklukları",
+                content: {
+                    lecture: `<h2>Anlatım Bozuklukları</h2><p>Dil bilgisi kurallarına aykırı kullanımlar, gereksiz kelime tekrarları, anlam karmaşası.</p>`,
+                    summary: `<h2>Özet</h2><p>Özne-yüklem uyumsuzluğu, gereksiz sözcük kullanımı, yanlış edat kullanımı, cümle kurgusu hataları.</p>`,
+                    tips: `<h2>İpucu</h2><p>"Geri dönmek" (doğru), "Geri geri dönmek" (yanlış - gereksiz tekrar).</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>"Kitabı okudum onu" yerine "Kitabı okudum" veya "Onu okudum" kullanılmalı.</p>`,
+                    questions: [{ id: 195, text: "Hangisinde anlatım bozukluğu vardır?", options: ["Eve gittim.", "Kitap okuyorum.", "Geri geri döndü.", "Çok güzel."], correct: 2 }],
+                    game: { type: "matching", pairs: [{ text: "Gereksiz Tekrar", match: "Bozukluk" }, { text: "Özne-Yüklem", match: "Uyum" }] }
+                }
+            },
+            {
+                id: "gorsel-okuma",
+                title: "6. Görsel Okuma",
+                content: {
+                    lecture: `<h2>Görsel Okuma</h2><p>Fotoğraf, tablo, grafik, harita, afiş gibi görselleri anlama ve yorumlama.</p>`,
+                    summary: `<h2>Özet</h2><p>Görseldeki mesajı anlama, sembol ve işaretleri yorumlama, görsel-metin ilişkisi kurma.</p>`,
+                    tips: `<h2>İpucu</h2><p>Görseldeki renk, şekil, boyut gibi unsurlara dikkat et.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Görselde olmayan bilgileri ekleme.</p>`,
+                    questions: [{ id: 196, text: "Görsel okumada en önemli unsur nedir?", options: ["Renk", "Mesaj", "Boyut", "Çerçeve"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Afiş", match: "Tanıtım" }, { text: "Grafik", match: "Veri" }] }
+                }
+            },
+            {
+                id: "fiilimsiler",
+                title: "7. Fiilimsiler",
+                content: {
+                    lecture: `<h2>Fiilimsiler</h2><p>İsim-fiil, Sıfat-fiil, Zarf-fiil.</p>`,
+                    summary: `<h2>Özet</h2><p>Mayışmak, Anası mezar dikecekmiş, Kenyalı...</p>`,
+                    tips: `<h2>İpucu</h2><p>Fiilimsiler yan cümlecik kurar.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Kalıcı isimleri karıştırma.</p>`,
+                    questions: [{ id: 201, text: "Hangisi sıfat-fiildir?", options: ["Gelmiş", "Gelen", "Gelip", "Gelmek"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "İsim Fiil", match: "-ma" }, { text: "Sıfat Fiil", match: "-an" }] }
+                }
+            },
+            {
+                id: "cumlenin-ogeleri",
+                title: "8. Cümlenin Ögeleri",
+                content: {
+                    lecture: `<h2>Cümlenin Ögeleri</h2><p>Yüklem, Özne, Nesne, Tümleçler.</p>`,
+                    summary: `<h2>Özet</h2><p>YÖN kuralı: Yüklem, Özne, Nesne sırasıyla bulunur.</p>`,
+                    tips: `<h2>İpucu</h2><p>Söz öbekleri ayrılmaz.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Hitaplar öge değildir.</p>`,
+                    questions: [{ id: 211, text: "İşi yapan öge hangisidir?", options: ["Nesne", "Özne", "Yüklem", "Zarf"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Yüklem", match: "Yargı" }, { text: "Özne", match: "Yapan" }] }
+                }
+            },
+            {
+                id: "fiilde-cati",
+                title: "9. Fiilde Çatı",
+                content: {
+                    lecture: `<h2>Fiilde Çatı</h2><p>Öznesine göre (Etken, Edilgen), Nesnesine göre (Geçişli, Geçişsiz).</p>`,
+                    summary: `<h2>Özet</h2><p>Etken: Özne belli. Edilgen: Özne belli değil (-l, -n eki). Geçişli: Nesne alır (Onu...).</p>`,
+                    tips: `<h2>İpucu</h2><p>"Onu" kelimesini getirebiliyorsan geçişlidir.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>İsim cümlelerinde çatı aranmaz.</p>`,
+                    questions: [{ id: 221, text: "Hangisi geçişli fiildir?", options: ["Uyudu", "Baktı", "Okudu", "Durdu"], correct: 2 }],
+                    game: { type: "matching", pairs: [{ text: "Etken", match: "Gerçek Özne" }, { text: "Edilgen", match: "Sözde Özne" }] }
+                }
+            },
+            {
+                id: "cumle-turleri",
+                title: "10. Cümle Türleri",
+                content: {
+                    lecture: `<h2>Cümle Türleri</h2><p>Yüklemine göre, Öge dizilişine göre, Anlamına göre, Yapısına göre.</p>`,
+                    summary: `<h2>Özet</h2><p>Basit, Birleşik (Fiilimsili), Sıralı, Bağlı cümleler.</p>`,
+                    tips: `<h2>İpucu</h2><p>Fiilimsa varsa genellikle "Girişik Birleşik Cümle"dir.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Devrik cümle yüklemi sonda olmayan cümledir.</p>`,
+                    questions: [{ id: 231, text: "İçinde fiilimsi bulunan cümle yapısı nedir?", options: ["Basit", "Birleşik", "Sıralı", "Bağlı"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Basit", match: "Tek Yargı" }, { text: "Sıralı", match: "Virgül" }] }
+                }
+            },
+            {
+                id: "yazim-noktalama",
+                title: "11. Yazım ve Noktalama",
+                content: {
+                    lecture: `<h2>Yazım ve Noktalama</h2><p>Büyük harfler, de/ki yazımı, noktalama işaretleri.</p>`,
+                    summary: `<h2>Özet</h2><p>Özel isimler büyük başlar. Bağlaç olan "de" ayrı yazılır.</p>`,
+                    tips: `<h2>İpucu</h2><p>"Ler" eki getirince anlam bozulmuyorsa bitişik yazılan -de ekidir.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Kurum kuruluş adlarına gelen ekler kesmeyle ayrılmaz.</p>`,
+                    questions: [{ id: 241, text: "Hangisinin yazımı yanlıştır?", options: ["TDK'nin", "TBMM'ye", "Ahmet'ler", "Ankara'da"], correct: 2 }],
+                    game: { type: "matching", pairs: [{ text: "Nokta", match: "Bitmiş Cümle" }, { text: "Virgül", match: "Sıralı Kelime" }] }
+                }
+            },
+            {
+                id: "metin-turleri",
+                title: "12. Metin Türleri ve Söz Sanatları",
+                content: {
+                    lecture: `<h2>Metin Türleri</h2><p>Makale, Deneme, Söyleşi, Fıkra, Roman, Hikaye.</p>`,
+                    summary: `<h2>Özet</h2><p>Makale: Nesnel, kanıt var. Deneme: Öznel, "ben" dili.</p>`,
+                    tips: `<h2>İpucu</h2><p>Abartma (Mübalağa), Benzetme (Teşbih), Kişileştirme (Teşhis).</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Fıkra (Köşe Yazısı) ile gülmece olan fıkrayı karıştırma.</p>`,
+                    questions: [{ id: 251, text: "Kanıtlama amacı güden yazı türü?", options: ["Deneme", "Makale", "Söyleşi", "Günlük"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Makale", match: "Nesnel" }, { text: "Deneme", match: "Öznel" }] }
+                }
+            },
+            {
+                id: "sozel-mantik",
+                title: "13. Sözel Mantık",
+                content: {
+                    lecture: `<h2>Sözel Mantık</h2><p>Akıl yürütme, tablo oluşturma, sıralama soruları.</p>`,
+                    summary: `<h2>Özet</h2><p>Verilenleri tabloya yerleştir, kesin olanları yaz, ihtimalleri not et.</p>`,
+                    tips: `<h2>İpucu</h2><p>Tablo çizmek soruyu çözmenin yarısıdır.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>"Olabilir" ve "Kesinlikle" ifadelerine dikkat et.</p>`,
+                    questions: [{ id: 261, text: "Sözel mantıkta en önemli yöntem nedir?", options: ["Hızlı okuma", "Tablo çizme", "Ezberleme", "Şık eleme"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Tablo", match: "Çözüm Aracı" }, { text: "Öncül", match: "İpucu" }] }
+                }
+            }
+        ]
+    },
+    history: {
+        topics: [
+            {
+                id: "bir-kahraman",
+                title: "1. Bir Kahraman Doğuyor",
+                content: {
+                    lecture: `<h2>Bir Kahraman Doğuyor</h2><p>Mustafa Kemal'in çocukluğu, eğitimi.</p>`,
+                    summary: `<h2>Özet</h2><p>Selanik, Manastır, İstanbul, Sofya.</p>`,
+                    tips: `<h2>İpucu</h2><p>Fikir akımları: Osmanlıcılık, İslamcılık, Türkçülük, Batıcılık.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Mustafa Kemal Şam'da Vatan ve Hürriyet Cemiyeti'ni kurdu.</p>`,
+                    questions: [{ id: 301, text: "M.Kemal'in doğduğu şehir?", options: ["Selanik", "Manastır", "İstanbul", "Sofya"], correct: 0 }],
+                    game: { type: "matching", pairs: [{ text: "Selanik", match: "Doğum" }, { text: "Şam", match: "İlk Görev" }] }
+                }
+            },
+            {
+                id: "milli-uyanis",
+                title: "2. Milli Uyanış",
+                content: {
+                    lecture: `<h2>Milli Uyanış</h2><p>I. Dünya Savaşı, Cemiyetler, Mondros, Kuvayi Milliye.</p>`,
+                    summary: `<h2>Özet</h2><p>Mondros 7. ve 24. madde işgallere zemin hazırladı. Yararlı ve Zararlı cemiyetler.</p>`,
+                    tips: `<h2>İpucu</h2><p>Milli cemiyetler Sivas Kongresi'nde birleştirildi.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Kuvayi Milliye düzensiz halk direnişidir.</p>`,
+                    questions: [{ id: 311, text: "İşgallere hukuki zemin hazırlayan Mondros maddesi?", options: ["7. Madde", "24. Madde", "1. Madde", "10. Madde"], correct: 0 }],
+                    game: { type: "matching", pairs: [{ text: "Mondros", match: "İşgal" }, { text: "Kuvayi Milliye", match: "Direniş" }] }
+                }
+            },
+            {
+                id: "ya-istiklal",
+                title: "3. Ya İstiklal Ya Ölüm",
+                content: {
+                    lecture: `<h2>Ya İstiklal Ya Ölüm</h2><p>Kurtuluş Savaşı Cepheleri: Doğu, Güney, Batı.</p>`,
+                    summary: `<h2>Özet</h2><p>Doğu: Ermenilerle (Gümrü). Güney: Fransız/Ermeni (Ankara). Batı: Yunanlılar (Mudanya).</p>`,
+                    tips: `<h2>İpucu</h2><p>İlk kapanan cephe Doğu, son kapanan Batı cephesidir.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Sakarya Savaşı "Subaylar Savaşı" olarak bilinir.</p>`,
+                    questions: [{ id: 321, text: "TBMM'nin ilk siyasi başarısı?", options: ["Gümrü Ant.", "Moskova Ant.", "Ankara Ant.", "Kars Ant."], correct: 0 }],
+                    game: { type: "matching", pairs: [{ text: "Doğu", match: "Kazım Karabekir" }, { text: "Batı", match: "İsmet İnönü" }] }
+                }
+            },
+            {
+                id: "ataturkculuk",
+                title: "4. Atatürkçülük ve Çağdaşlaşma",
+                content: {
+                    lecture: `<h2>Atatürkçülük</h2><p>Atatürk İlkeleri ve İnkılaplar.</p>`,
+                    summary: `<h2>Özet</h2><p>Cumhuriyetçilik, Milliyetçilik, Halkçılık, Devletçilik, Laiklik, İnkılapçılık.</p>`,
+                    tips: `<h2>İpucu</h2><p>Akıl ve bilim -> Laiklik. Eşitlik -> Halkçılık. Ekonomi -> Devletçilik.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Saltanatın kaldırılması Laiklik yolunda ilk adımdır.</p>`,
+                    questions: [{ id: 331, text: "Din ve devlet işlerinin ayrılması?", options: ["Laiklik", "Halkçılık", "Devletçilik", "İnkılapçılık"], correct: 0 }],
+                    game: { type: "matching", pairs: [{ text: "Cumhuriyetçilik", match: "Seçim" }, { text: "Laiklik", match: "Din/Devlet" }] }
+                }
+            },
+            {
+                id: "demokratiklesme",
+                title: "5. Demokratikleşme Çabaları",
+                content: {
+                    lecture: `<h2>Demokratikleşme</h2><p>Çok partili hayata geçiş denemeleri.</p>`,
+                    summary: `<h2>Özet</h2><p>Terakkiperver Cumhuriyet Fırkası, Serbest Cumhuriyet Fırkası. Menemen Olayı, Şeyh Sait İsyanı.</p>`,
+                    tips: `<h2>İpucu</h2><p>İsyanlar nedeniyle çok partili hayata geçiş ertelendi.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Mustafa Kemal'in kurduğu parti CHP'dir.</p>`,
+                    questions: [{ id: 341, text: "Türkiye'nin ilk muhalefet partisi?", options: ["Terakkiperver", "Serbest", "Demokrat", "Milli"], correct: 0 }],
+                    game: { type: "matching", pairs: [{ text: "Şeyh Sait", match: "İsyan" }, { text: "Menemen", match: "Kubilay" }] }
+                }
+            },
+            {
+                id: "dis-politika",
+                title: "6. Dış Politika",
+                content: {
+                    lecture: `<h2>Dış Politika</h2><p>Musul sorunu, Hatay sorunu, Boğazlar, Nüfus Mübadelesi.</p>`,
+                    summary: `<h2>Özet</h2><p>Yurtta Sulh Cihanda Sulh. Hatay 1939'da anavatana katıldı.</p>`,
+                    tips: `<h2>İpucu</h2><p>Montrö Boğazlar Sözleşmesi ile boğazlarda tam egemenlik sağlandı.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Musul, Misakı Milli'den taviz verilerek Irak'a bırakıldı.</p>`,
+                    questions: [{ id: 351, text: "Hatay ne zaman anavatana katıldı?", options: ["1938", "1939", "1930", "1923"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Montrö", match: "Boğazlar" }, { text: "Hatay", match: "Tayfur Sökmen" }] }
+                }
+            },
+            {
+                id: "ataturk-olumu",
+                title: "7. Atatürk'ün Ölümü",
+                content: {
+                    lecture: `<h2>Atatürk'ün Ölümü ve Sonrası</h2><p>10 Kasım 1938. II. Dünya Savaşı yılları.</p>`,
+                    summary: `<h2>Özet</h2><p>Atatürk'ün mirası, eserleri. II. Dünya Savaşı'nda Türkiye'nin denge politikası.</p>`,
+                    tips: `<h2>İpucu</h2><p>Türkiye II. Dünya Savaşı'na fiilen girmedi.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Atatürk'ün naaşı önce Etnografya Müzesi'ndeydi, sonra Anıtkabir'e taşındı.</p>`,
+                    questions: [{ id: 361, text: "Atatürk nerede vefat etti?", options: ["Dolmabahçe", "Çankaya", "Topkapı", "Yıldız"], correct: 0 }],
+                    game: { type: "matching", pairs: [{ text: "1938", match: "Vefat" }, { text: "Anıtkabir", match: "Mezar" }] }
+                }
+            }
+        ]
+    },
+    english: {
+        topics: [
+            {
+                id: "friendship",
+                title: "1. Friendship",
+                content: {
+                    lecture: `<h2>Friendship</h2><p>Accepting, Refusing, Invitations.</p>`,
+                    summary: `<h2>Summary</h2><p>Buddy, Mate, Count on, Back up, Get on well.</p>`,
+                    tips: `<h2>Tips</h2><p>Would you like to...? How about...?</p>`,
+                    mistakes: `<h2>Attention</h2><p>Stubborn = Obstinate.</p>`,
+                    questions: [{ id: 401, text: "Synonym of Trust?", options: ["Count on", "Lie", "Refuse", "Argue"], correct: 0 }],
+                    game: { type: "matching", pairs: [{ text: "Buddy", match: "Friend" }, { text: "Back up", match: "Support" }] }
+                }
+            },
+            {
+                id: "teen-life",
+                title: "2. Teen Life",
+                content: {
+                    lecture: `<h2>Teen Life</h2><p>Daily routines, preferences, music, sports.</p>`,
+                    summary: `<h2>Summary</h2><p>Prefer, Keen on, Fond of, Can't stand.</p>`,
+                    tips: `<h2>Tips</h2><p>Prefer Ving to Ving.</p>`,
+                    mistakes: `<h2>Attention</h2><p>Ridiculous = Silly.</p>`,
+                    questions: [{ id: 411, text: "I prefer ______ music.", options: ["listen", "listening", "listens", "to listen"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Keen on", match: "Like" }, { text: "Can't stand", match: "Hate" }] }
+                }
+            },
+            {
+                id: "in-the-kitchen",
+                title: "3. In The Kitchen",
+                content: {
+                    lecture: `<h2>In The Kitchen</h2><p>Cooking methods, ingredients, recipes.</p>`,
+                    summary: `<h2>Summary</h2><p>Boil, Fry, Grill, Bake, Roast, Chop, Slice, Peel.</p>`,
+                    tips: `<h2>Tips</h2><p>First, Second, Then, After that, Finally.</p>`,
+                    mistakes: `<h2>Attention</h2><p>Recipe = Tarif. Receipt = Fiş.</p>`,
+                    questions: [{ id: 421, text: "Cooking in hot oil?", options: ["Boil", "Fry", "Bake", "Steam"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Boil", match: "Haşlamak" }, { text: "Fry", match: "Kızartmak" }] }
+                }
+            },
+            {
+                id: "on-the-phone",
+                title: "4. On The Phone",
+                content: {
+                    lecture: `<h2>On The Phone</h2><p>Phone conversations, leaving a message.</p>`,
+                    summary: `<h2>Summary</h2><p>Pick up, Hang up, Hold on, Put through, Available.</p>`,
+                    tips: `<h2>Tips</h2><p>May I speak to...? Is ... there?</p>`,
+                    mistakes: `<h2>Attention</h2><p>Hang on = Hold on (Beklemek).</p>`,
+                    questions: [{ id: 431, text: "Don't ______ the phone, please.", options: ["hang up", "pick up", "dial", "call"], correct: 0 }],
+                    game: { type: "matching", pairs: [{ text: "Hold on", match: "Wait" }, { text: "Put through", match: "Connect" }] }
+                }
+            },
+            {
+                id: "the-internet",
+                title: "5. The Internet",
+                content: {
+                    lecture: `<h2>The Internet</h2><p>Internet habits, safety, connection.</p>`,
+                    summary: `<h2>Summary</h2><p>Log in, Log out, Sign up, Download, Upload, Connection.</p>`,
+                    tips: `<h2>Tips</h2><p>Social networking sites, online banking.</p>`,
+                    mistakes: `<h2>Attention</h2><p>Register = Sign up.</p>`,
+                    questions: [{ id: 441, text: "To put a file onto the internet?", options: ["Download", "Upload", "Login", "Search"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Download", match: "İndirmek" }, { text: "Upload", match: "Yüklemek" }] }
+                }
+            },
+            {
+                id: "adventures",
+                title: "6. Adventures",
+                content: {
+                    lecture: `<h2>Adventures</h2><p>Extreme sports, preferences, equipment.</p>`,
+                    summary: `<h2>Summary</h2><p>Paragliding, Bungee jumping, Caving, Rafting. Challenging, Fascinating.</p>`,
+                    tips: `<h2>Tips</h2><p>I would rather... than...</p>`,
+                    mistakes: `<h2>Attention</h2><p>Amusing = Eğlenceli. Amazing = Şaşırtıcı.</p>`,
+                    questions: [{ id: 451, text: "Jumping from a bridge with a rope?", options: ["Rafting", "Bungee Jumping", "Caving", "Surfing"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Helmet", match: "Kask" }, { text: "Torch", match: "El Feneri" }] }
+                }
+            },
+            {
+                id: "tourism",
+                title: "7. Tourism",
+                content: {
+                    lecture: `<h2>Tourism</h2><p>Holiday types, places, experiences.</p>`,
+                    summary: `<h2>Summary</h2><p>All-inclusive, Bed and breakfast, Historic sites, Ancient.</p>`,
+                    tips: `<h2>Tips</h2><p>Have you ever been to...?</p>`,
+                    mistakes: `<h2>Attention</h2><p>Souvenir = Hediyelik eşya.</p>`,
+                    questions: [{ id: 461, text: "A place where kings lived?", options: ["Mosque", "Palace", "Bridge", "Tower"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Ancient", match: "Old" }, { text: "Incredible", match: "Unbelievable" }] }
+                }
+            },
+            {
+                id: "chores",
+                title: "8. Chores",
+                content: {
+                    lecture: `<h2>Chores</h2><p>Housework, responsibilities, obligations.</p>`,
+                    summary: `<h2>Summary</h2><p>Mop the floor, Dust the furniture, Load the dishwasher, Iron the clothes.</p>`,
+                    tips: `<h2>Tips</h2><p>Have to / Must / Should.</p>`,
+                    mistakes: `<h2>Attention</h2><p>Make the bed = Yatağı düzeltmek.</p>`,
+                    questions: [{ id: 471, text: "Cleaning the floor with water?", options: ["Dusting", "Mopping", "Ironing", "Vacuuming"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Laundry", match: "Çamaşır" }, { text: "Grocery", match: "Market" }] }
+                }
+            },
+            {
+                id: "science",
+                title: "9. Science",
+                content: {
+                    lecture: `<h2>Science</h2><p>Inventions, discoveries, scientists.</p>`,
+                    summary: `<h2>Summary</h2><p>Lab, Experiment, Test tube, Explode, Cure, Vaccinate.</p>`,
+                    tips: `<h2>Tips</h2><p>Process, Result, High-tech.</p>`,
+                    mistakes: `<h2>Attention</h2><p>Discover (Keşfetmek) vs Invent (İcat etmek).</p>`,
+                    questions: [{ id: 481, text: "Creating something new?", options: ["Discover", "Invent", "Explore", "Search"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Lab", match: "Laboratuvar" }, { text: "Cure", match: "Tedavi" }] }
+                }
+            },
+            {
+                id: "natural-forces",
+                title: "10. Natural Forces",
+                content: {
+                    lecture: `<h2>Natural Forces</h2><p>Disasters, environment, future problems.</p>`,
+                    summary: `<h2>Summary</h2><p>Earthquake, Tsunami, Flood, Drought, Avalanche, Global Warming.</p>`,
+                    tips: `<h2>Tips</h2><p>Take precautions, Save energy.</p>`,
+                    mistakes: `<h2>Attention</h2><p>Drought = Kuraklık.</p>`,
+                    questions: [{ id: 491, text: "Too much water on land?", options: ["Drought", "Flood", "Fire", "Storm"], correct: 1 }],
+                    game: { type: "matching", pairs: [{ text: "Earthquake", match: "Deprem" }, { text: "Flood", match: "Sel" }] }
+                }
+            }
+        ]
+    },
+    religion: {
+        lecture: `<h2>Milli Uyanış</h2><p>I. Dünya Savaşı, Cemiyetler, Mondros, Kuvayi Milliye.</p>`,
+        summary: `<h2>Özet</h2><p>Mondros 7. ve 24. madde işgallere zemin hazırladı. Yararlı ve Zararlı cemiyetler.</p>`,
+        tips: `<h2>İpucu</h2><p>Milli cemiyetler Sivas Kongresi'nde birleştirildi.</p>`,
+        mistakes: `<h2>Dikkat</h2><p>Kuvayi Milliye düzensiz halk direnişidir.</p>`,
+        questions: [{ id: 311, text: "İşgallere hukuki zemin hazırlayan Mondros maddesi?", options: ["7. Madde", "24. Madde", "1. Madde", "10. Madde"], correct: 0 }],
+        game: { type: "matching", pairs: [{ text: "Mondros", match: "İşgal" }, { text: "Kuvayi Milliye", match: "Direniş" }] }
+    }
+},
+    {
+        id: "ya-istiklal",
+        title: "3. Ya İstiklal Ya Ölüm",
+        content: {
+            lecture: `<h2>Ya İstiklal Ya Ölüm</h2><p>Kurtuluş Savaşı Cepheleri: Doğu, Güney, Batı.</p>`,
+                summary: `<h2>Özet</h2><p>Doğu: Ermenilerle (Gümrü). Güney: Fransız/Ermeni (Ankara). Batı: Yunanlılar (Mudanya).</p>`,
+                    tips: `<h2>İpucu</h2><p>İlk kapanan cephe Doğu, son kapanan Batı cephesidir.</p>`,
+                        mistakes: `<h2>Dikkat</h2><p>Sakarya Savaşı "Subaylar Savaşı" olarak bilinir.</p>`,
+                            questions: [{ id: 321, text: "TBMM'nin ilk siyasi başarısı?", options: ["Gümrü Ant.", "Moskova Ant.", "Ankara Ant.", "Kars Ant."], correct: 0 }],
+                                game: { type: "matching", pairs: [{ text: "Doğu", match: "Kazım Karabekir" }, { text: "Batı", match: "İsmet İnönü" }] }
+                }
+            },
+{
+    id: "ataturkculuk",
+        title: "4. Atatürkçülük ve Çağdaşlaşma",
+            content: {
+        lecture: `<h2>Atatürkçülük</h2><p>Atatürk İlkeleri ve İnkılaplar.</p>`,
+            summary: `<h2>Özet</h2><p>Cumhuriyetçilik, Milliyetçilik, Halkçılık, Devletçilik, Laiklik, İnkılapçılık.</p>`,
+                tips: `<h2>İpucu</h2><p>Akıl ve bilim -> Laiklik. Eşitlik -> Halkçılık. Ekonomi -> Devletçilik.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Saltanatın kaldırılması Laiklik yolunda ilk adımdır.</p>`,
+                        questions: [{ id: 331, text: "Din ve devlet işlerinin ayrılması?", options: ["Laiklik", "Halkçılık", "Devletçilik", "İnkılapçılık"], correct: 0 }],
+                            game: { type: "matching", pairs: [{ text: "Cumhuriyetçilik", match: "Seçim" }, { text: "Laiklik", match: "Din/Devlet" }] }
+    }
+},
+{
+    id: "demokratiklesme",
+        title: "5. Demokratikleşme Çabaları",
+            content: {
+        lecture: `<h2>Demokratikleşme</h2><p>Çok partili hayata geçiş denemeleri.</p>`,
+            summary: `<h2>Özet</h2><p>Terakkiperver Cumhuriyet Fırkası, Serbest Cumhuriyet Fırkası. Menemen Olayı, Şeyh Sait İsyanı.</p>`,
+                tips: `<h2>İpucu</h2><p>İsyanlar nedeniyle çok partili hayata geçiş ertelendi.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Mustafa Kemal'in kurduğu parti CHP'dir.</p>`,
+                        questions: [{ id: 341, text: "Türkiye'nin ilk muhalefet partisi?", options: ["Terakkiperver", "Serbest", "Demokrat", "Milli"], correct: 0 }],
+                            game: { type: "matching", pairs: [{ text: "Şeyh Sait", match: "İsyan" }, { text: "Menemen", match: "Kubilay" }] }
+    }
+},
+{
+    id: "dis-politika",
+        title: "6. Dış Politika",
+            content: {
+        lecture: `<h2>Dış Politika</h2><p>Musul sorunu, Hatay sorunu, Boğazlar, Nüfus Mübadelesi.</p>`,
+            summary: `<h2>Özet</h2><p>Yurtta Sulh Cihanda Sulh. Hatay 1939'da anavatana katıldı.</p>`,
+                tips: `<h2>İpucu</h2><p>Montrö Boğazlar Sözleşmesi ile boğazlarda tam egemenlik sağlandı.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Musul, Misakı Milli'den taviz verilerek Irak'a bırakıldı.</p>`,
+                        questions: [{ id: 351, text: "Hatay ne zaman anavatana katıldı?", options: ["1938", "1939", "1930", "1923"], correct: 1 }],
+                            game: { type: "matching", pairs: [{ text: "Montrö", match: "Boğazlar" }, { text: "Hatay", match: "Tayfur Sökmen" }] }
+    }
+},
+{
+    id: "ataturk-olumu",
+        title: "7. Atatürk'ün Ölümü",
+            content: {
+        lecture: `<h2>Atatürk'ün Ölümü ve Sonrası</h2><p>10 Kasım 1938. II. Dünya Savaşı yılları.</p>`,
+            summary: `<h2>Özet</h2><p>Atatürk'ün mirası, eserleri. II. Dünya Savaşı'nda Türkiye'nin denge politikası.</p>`,
+                tips: `<h2>İpucu</h2><p>Türkiye II. Dünya Savaşı'na fiilen girmedi.</p>`,
+                    mistakes: `<h2>Dikkat</h2><p>Atatürk'ün naaşı önce Etnografya Müzesi'ndeydi, sonra Anıtkabir'e taşındı.</p>`,
+                        questions: [{ id: 361, text: "Atatürk nerede vefat etti?", options: ["Dolmabahçe", "Çankaya", "Topkapı", "Yıldız"], correct: 0 }],
+                            game: { type: "matching", pairs: [{ text: "1938", match: "Vefat" }, { text: "Anıtkabir", match: "Mezar" }] }
+    }
+}
+        ]
+    },
+english: {
+    topics: [
+        {
+            id: "friendship",
+            title: "1. Friendship",
+            content: {
+                lecture: `<h2>Friendship</h2><p>Accepting, Refusing, Invitations.</p>`,
+                summary: `<h2>Summary</h2><p>Buddy, Mate, Count on, Back up, Get on well.</p>`,
+                tips: `<h2>Tips</h2><p>Would you like to...? How about...?</p>`,
+                mistakes: `<h2>Attention</h2><p>Stubborn = Obstinate.</p>`,
+                questions: [{ id: 401, text: "Synonym of Trust?", options: ["Count on", "Lie", "Refuse", "Argue"], correct: 0 }],
+                game: { type: "matching", pairs: [{ text: "Buddy", match: "Friend" }, { text: "Back up", match: "Support" }] }
+            }
+        },
+        {
+            id: "teen-life",
+            title: "2. Teen Life",
+            content: {
+                lecture: `<h2>Teen Life</h2><p>Daily routines, preferences, music, sports.</p>`,
+                summary: `<h2>Summary</h2><p>Prefer, Keen on, Fond of, Can't stand.</p>`,
+                tips: `<h2>Tips</h2><p>Prefer Ving to Ving.</p>`,
+                mistakes: `<h2>Attention</h2><p>Ridiculous = Silly.</p>`,
+                questions: [{ id: 411, text: "I prefer ______ music.", options: ["listen", "listening", "listens", "to listen"], correct: 1 }],
+                game: { type: "matching", pairs: [{ text: "Keen on", match: "Like" }, { text: "Can't stand", match: "Hate" }] }
+            }
+        },
+        {
+            id: "in-the-kitchen",
+            title: "3. In The Kitchen",
+            content: {
+                lecture: `<h2>In The Kitchen</h2><p>Cooking methods, ingredients, recipes.</p>`,
+                summary: `<h2>Summary</h2><p>Boil, Fry, Grill, Bake, Roast, Chop, Slice, Peel.</p>`,
+                tips: `<h2>Tips</h2><p>First, Second, Then, After that, Finally.</p>`,
+                mistakes: `<h2>Attention</h2><p>Recipe = Tarif. Receipt = Fiş.</p>`,
+                questions: [{ id: 421, text: "Cooking in hot oil?", options: ["Boil", "Fry", "Bake", "Steam"], correct: 1 }],
+                game: { type: "matching", pairs: [{ text: "Boil", match: "Haşlamak" }, { text: "Fry", match: "Kızartmak" }] }
+            }
+        },
+        {
+            id: "on-the-phone",
+            title: "4. On The Phone",
+            content: {
+                lecture: `<h2>On The Phone</h2><p>Phone conversations, leaving a message.</p>`,
+                summary: `<h2>Summary</h2><p>Pick up, Hang up, Hold on, Put through, Available.</p>`,
+                tips: `<h2>Tips</h2><p>May I speak to...? Is ... there?</p>`,
+                mistakes: `<h2>Attention</h2><p>Hang on = Hold on (Beklemek).</p>`,
+                questions: [{ id: 431, text: "Don't ______ the phone, please.", options: ["hang up", "pick up", "dial", "call"], correct: 0 }],
+                game: { type: "matching", pairs: [{ text: "Hold on", match: "Wait" }, { text: "Put through", match: "Connect" }] }
+            }
+        },
+        {
+            id: "the-internet",
+            title: "5. The Internet",
+            content: {
+                lecture: `<h2>The Internet</h2><p>Internet habits, safety, connection.</p>`,
+                summary: `<h2>Summary</h2><p>Log in, Log out, Sign up, Download, Upload, Connection.</p>`,
+                tips: `<h2>Tips</h2><p>Social networking sites, online banking.</p>`,
+                mistakes: `<h2>Attention</h2><p>Register = Sign up.</p>`,
+                questions: [{ id: 441, text: "To put a file onto the internet?", options: ["Download", "Upload", "Login", "Search"], correct: 1 }],
+                game: { type: "matching", pairs: [{ text: "Download", match: "İndirmek" }, { text: "Upload", match: "Yüklemek" }] }
+            }
+        },
+        {
+            id: "adventures",
+            title: "6. Adventures",
+            content: {
+                lecture: `<h2>Adventures</h2><p>Extreme sports, preferences, equipment.</p>`,
+                summary: `<h2>Summary</h2><p>Paragliding, Bungee jumping, Caving, Rafting. Challenging, Fascinating.</p>`,
+                tips: `<h2>Tips</h2><p>I would rather... than...</p>`,
+                mistakes: `<h2>Attention</h2><p>Amusing = Eğlenceli. Amazing = Şaşırtıcı.</p>`,
+                questions: [{ id: 451, text: "Jumping from a bridge with a rope?", options: ["Rafting", "Bungee Jumping", "Caving", "Surfing"], correct: 1 }],
+                game: { type: "matching", pairs: [{ text: "Helmet", match: "Kask" }, { text: "Torch", match: "El Feneri" }] }
+            }
+        },
+        {
+            id: "tourism",
+            title: "7. Tourism",
+            content: {
+                lecture: `<h2>Tourism</h2><p>Holiday types, places, experiences.</p>`,
+                summary: `<h2>Summary</h2><p>All-inclusive, Bed and breakfast, Historic sites, Ancient.</p>`,
+                tips: `<h2>Tips</h2><p>Have you ever been to...?</p>`,
+                mistakes: `<h2>Attention</h2><p>Souvenir = Hediyelik eşya.</p>`,
+                questions: [{ id: 461, text: "A place where kings lived?", options: ["Mosque", "Palace", "Bridge", "Tower"], correct: 1 }],
+                game: { type: "matching", pairs: [{ text: "Ancient", match: "Old" }, { text: "Incredible", match: "Unbelievable" }] }
+            }
+        },
+        {
+            id: "chores",
+            title: "8. Chores",
+            content: {
+                lecture: `<h2>Chores</h2><p>Housework, responsibilities, obligations.</p>`,
+                summary: `<h2>Summary</h2><p>Mop the floor, Dust the furniture, Load the dishwasher, Iron the clothes.</p>`,
+                tips: `<h2>Tips</h2><p>Have to / Must / Should.</p>`,
+                mistakes: `<h2>Attention</h2><p>Make the bed = Yatağı düzeltmek.</p>`,
+                questions: [{ id: 471, text: "Cleaning the floor with water?", options: ["Dusting", "Mopping", "Ironing", "Vacuuming"], correct: 1 }],
+                game: { type: "matching", pairs: [{ text: "Laundry", match: "Çamaşır" }, { text: "Grocery", match: "Market" }] }
+            }
+        },
+        {
+            id: "science",
+            title: "9. Science",
+            content: {
+                lecture: `<h2>Science</h2><p>Inventions, discoveries, scientists.</p>`,
+                summary: `<h2>Summary</h2><p>Lab, Experiment, Test tube, Explode, Cure, Vaccinate.</p>`,
+                tips: `<h2>Tips</h2><p>Process, Result, High-tech.</p>`,
+                mistakes: `<h2>Attention</h2><p>Discover (Keşfetmek) vs Invent (İcat etmek).</p>`,
+                questions: [{ id: 481, text: "Creating something new?", options: ["Discover", "Invent", "Explore", "Search"], correct: 1 }],
+                game: { type: "matching", pairs: [{ text: "Lab", match: "Laboratuvar" }, { text: "Cure", match: "Tedavi" }] }
+            }
+        },
+        {
+            id: "natural-forces",
+            title: "10. Natural Forces",
+            content: {
+                lecture: `<h2>Natural Forces</h2><p>Disasters, environment, future problems.</p>`,
+                summary: `<h2>Summary</h2><p>Earthquake, Tsunami, Flood, Drought, Avalanche, Global Warming.</p>`,
+                tips: `<h2>Tips</h2><p>Take precautions, Save energy.</p>`,
+                mistakes: `<h2>Attention</h2><p>Drought = Kuraklık.</p>`,
+                questions: [{ id: 491, text: "Too much water on land?", options: ["Drought", "Flood", "Fire", "Storm"], correct: 1 }],
+                game: { type: "matching", pairs: [{ text: "Earthquake", match: "Deprem" }, { text: "Flood", match: "Sel" }] }
+            }
+        }
+    ]
+},
+religion: {
+    topics: [
+        {
+            id: "kader",
+            title: "1. Kader İnancı",
+            content: {
+                lecture: `<h2>Kader İnancı</h2><p>Kader, Kaza, Yasalar, İrade. Evrendeki yasalar (Sünnetullah): Fiziksel, Biyolojik, Toplumsal.</p>
+                    <h3>Hz. Musa (a.s.)</h3><p>Firavun'a karşı mücadele, Tur Dağı'nda vahiy, Kızıldeniz'in yarılması.</p>
+                    <h3>Ayet el-Kürsi</h3><p>Allah'ın büyüklüğünü anlatan en önemli ayetlerden biri. Bakara Suresi 255. ayet.</p>`,
+                summary: `<h2>Özet</h2><p>Sünnetullah, Cüzi İrade, Külli İrade, Tevekkül. Hz. Musa: Peygamberlik mücadelesi.</p>`,
+                tips: `<h2>İpucu</h2><p>Emek ve Rızık ilişkisi. Tedbir bizden, takdir Allah'tan.</p>`,
+                mistakes: `<h2>Dikkat</h2><p>Sorumluluktan kaçılamaz. Kader bahane edilemez.</p>`,
+                questions: [{ id: 501, text: "Allah'ın yasaları?", options: ["Sünnetullah", "Farz", "Vacip", "Sünnet"], correct: 0 }],
+                game: { type: "matching", pairs: [{ text: "Kader", match: "Ölçü" }, { text: "Hz. Musa", match: "Firavun" }] }
+            }
+        },
+        {
+            id: "zekat",
+            title: "2. Zekat ve Sadaka",
+            content: {
+                lecture: `<h2>Zekat ve Sadaka</h2><p>Zekat oranları, kimlere verilir, sadaka çeşitleri.</p>
+                    <h3>Hz. Şuayb (a.s.)</h3><p>Ticaret ahlakı, dürüstlük ve adalet konusunda toplumunu uyaran peygamber.</p>
+                    <h3>Maun Suresi</h3><p>Yetime ve yoksula yardım etmemenin kınanması. Namaz kılarken gaflet içinde olanlar uyarılır.</p>`,
+                summary: `<h2>Özet</h2><p>Nisab miktarı, 1/40 oranı. Sadaka-i Cariye (Kalıcı iyilik). Hz. Şuayb: Ticaret ahlakı.</p>`,
+                tips: `<h2>İpucu</h2><p>Fitre (Fıtır Sadakası) Ramazan'da verilir. Zekat malı temizler.</p>`,
+                mistakes: `<h2>Dikkat</h2><p>Anne, baba, çocuklara zekat verilmez.</p>`,
+                questions: [{ id: 511, text: "Kalıcı sadaka?", options: ["Sadaka-i Cariye", "Fitre", "Zekat", "Fidye"], correct: 0 }],
+                game: { type: "matching", pairs: [{ text: "Zekat", match: "Farz" }, { text: "Hz. Şuayb", match: "Ticaret" }] }
+            }
+        },
+        {
+            id: "din-hayat",
+            title: "3. Din ve Hayat",
+            content: {
+                lecture: `<h2>Din ve Hayat</h2><p>Dinin birey ve toplum üzerindeki etkisi. Zarurat-ı Hamse (5 Temel Esas): Can, Mal, Akıl, Nesil, Din.</p>
+                    <h3>Hz. Yusuf (a.s.)</h3><p>Sabır, güven ve affetme örneği. Mısır'da vezirlik, kardeşlerini affetmesi.</p>
+                    <h3>Asr Suresi</h3><p>Zamanın önemi, iman ve salih amel. İnsanın hüsranda olduğu vurgulanır.</p>`,
+                summary: `<h2>Özet</h2><p>Canın, Malın, Aklın, Neslin, Dinin korunması. Hz. Yusuf: Sabır ve af.</p>`,
+                tips: `<h2>İpucu</h2><p>İçki/Uyuşturucu -> Aklın korunması. Hırsızlık -> Malın korunması.</p>`,
+                mistakes: `<h2>Dikkat</h2><p>İslam dini kolaylık dinidir.</p>`,
+                questions: [{ id: 521, text: "İçki yasağı hangisini korur?", options: ["Can", "Mal", "Akıl", "Din"], correct: 2 }],
+                game: { type: "matching", pairs: [{ text: "Nesil", match: "Aile" }, { text: "Hz. Yusuf", match: "Sabır" }] }
+            }
+        },
+        {
+            id: "hz-muhammed",
+            title: "4. Hz. Muhammed'in Örnekliği",
+            content: {
+                lecture: `<h2>Hz. Muhammed'in Örnekliği</h2><p>Sıdk (Doğruluk), Emanet (Güvenilirlik), Fetanet (Zeka), İsmet (Günahsızlık), Tebliğ (Bildirme).</p>
+                    <h3>Kureyş Suresi</h3><p>Kureyş kabilesinin ticaret kervanları ve Kabe'nin önemi. Allah'a şükretmeleri gerektiği vurgulanır.</p>`,
+                summary: `<h2>Özet</h2><p>Muhammedü'l Emin (Güvenilir). İstişareye önem vermesi. Merhametli olması. Üsve-i Hasene.</p>`,
+                tips: `<h2>İpucu</h2><p>Peygamberimiz de bir insandır, gaybı bilemez.</p>`,
+                mistakes: `<h2>Dikkat</h2><p>Peygamberlik özelliklerini bilmek önemlidir.</p>`,
+                questions: [{ id: 531, text: "Peygamberimizin güvenilir olması?", options: ["Sıdk", "Emanet", "Fetanet", "Tebliğ"], correct: 1 }],
+                game: { type: "matching", pairs: [{ text: "Emin", match: "Güvenilir" }, { text: "İstişare", match: "Danışma" }] }
+            }
+        },
+        {
+            id: "kuran",
+            title: "5. Kur'an-ı Kerim",
+            content: {
+                lecture: `<h2>Kur'an-ı Kerim ve Özellikleri</h2><p>İslam'ın temel kaynağı. Evrensel mesajlar. 114 Sure, 6236 Ayet.</p>
+                    <h3>Hz. Nuh (a.s.)</h3><p>950 yıl tebliğ, gemi yapımı, tufan. Sabır ve sebat örneği.</p>`,
+                summary: `<h2>Özet</h2><p>Ayet, Sure, Cüz. Kur'an akla hitap eder, düşünmeyi öğütler. Hz. Nuh: Sabır.</p>`,
+                tips: `<h2>İpucu</h2><p>Kur'an'ın ilk inen suresi: Alak. Son inen: Nasr.</p>`,
+                mistakes: `<h2>Dikkat</h2><p>Kur'an sadece Araplara değil tüm insanlığa indirilmiştir.</p>`,
+                questions: [{ id: 541, text: "Kur'an'ın en kısa suresi?", options: ["Kevser", "İhlas", "Fatiha", "Bakara"], correct: 0 }],
+                game: { type: "matching", pairs: [{ text: "Ayet", match: "Cümle" }, { text: "Hz. Nuh", match: "Gemi" }] }
+                }
+                }
+        ]
+    } 
